@@ -19,7 +19,7 @@ include 'includes/header.php';
 <div class="space-y-lg">
     <section class="text-center md:text-left mb-xl">
         <h2 class="font-headline-xl text-headline-xl mb-sm text-on-surface">Bienvenido a tu Academia de Diseño</h2>
-        <p class="font-body-lg text-body-lg text-on-surface-variant">Elige un programa para comenzar tu camino creativo o consulta a nuestro asistente IA.</p>
+        <p class="font-body-lg text-body-lg text-on-surface-variant">Elige un programa para comenzar tu camino creativo o consulta a nuestro asistente IA. (Sincronización Verificada)</p>
     </section>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
