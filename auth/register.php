@@ -55,8 +55,6 @@ include '../includes/header.php';
         <div class="flex items-center justify-center mx-auto mb-md">
             <img src="/tutor/assets/imgs/logo_learning.png" alt="Learn Design Logo" class="h-20 object-contain drop-shadow-md">
         </div>
-        <h2 class="font-headline-lg text-headline-lg text-on-surface">Únete a la Academia</h2>
-        <p class="font-body-sm text-on-surface-variant">Comienza tu camino creativo hoy mismo.</p>
     </div>
 
     <?php if ($error): ?>
