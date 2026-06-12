@@ -89,8 +89,18 @@ include '../includes/header.php';
                             </div>
                         <?php endif; ?>
                         
-                        <div class="mt-md text-xs text-on-surface-variant">
-                            Enviado el: <?php echo date('d/m/Y H:i', strtotime($proj['fecha_creacion'])); ?>
+                        <div class="mt-md flex items-center justify-between">
+                            <div class="text-xs text-on-surface-variant">
+                                Enviado el: <?php echo date('d/m/Y H:i', strtotime($proj['fecha_creacion'])); ?>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <a href="editar_proyecto.php?id=<?php echo $proj['id']; ?>" class="inline-flex items-center gap-1 text-primary hover:bg-primary/10 px-2 py-1 rounded transition-colors text-sm">
+                                    <span class="material-symbols-outlined text-[16px]">edit</span> Editar
+                                </a>
+                                <a href="eliminar_proyecto.php?id=<?php echo $proj['id']; ?>" class="inline-flex items-center gap-1 text-error hover:bg-error/10 px-2 py-1 rounded transition-colors text-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar este proyecto?');">
+                                    <span class="material-symbols-outlined text-[16px]">delete</span> Eliminar
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

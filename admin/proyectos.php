@@ -92,13 +92,18 @@ include '../includes/header.php';
                                     <?php endif; ?>
                                 </td>
                                 <td class="px-lg py-md text-right">
-                                    <a href="calificar_proyecto.php?id=<?php echo $proj['id']; ?>" class="inline-flex items-center gap-1 <?php echo ($proj['estado'] == 'revision') ? 'bg-primary-container text-on-primary' : 'bg-surface-variant text-on-surface'; ?> px-3 py-1.5 rounded text-sm hover:brightness-110 transition-all">
-                                        <?php if ($proj['estado'] === 'revision'): ?>
-                                            <span class="material-symbols-outlined text-[18px]">grading</span> Evaluar
-                                        <?php else: ?>
-                                            <span class="material-symbols-outlined text-[18px]">visibility</span> Ver
-                                        <?php endif; ?>
-                                    </a>
+                                    <div class="flex items-center justify-end gap-2">
+                                        <a href="calificar_proyecto.php?id=<?php echo $proj['id']; ?>" class="inline-flex items-center gap-1 <?php echo ($proj['estado'] == 'revision') ? 'bg-primary-container text-on-primary' : 'bg-surface-variant text-on-surface'; ?> px-3 py-1.5 rounded text-sm hover:brightness-110 transition-all">
+                                            <?php if ($proj['estado'] === 'revision'): ?>
+                                                <span class="material-symbols-outlined text-[18px]">grading</span> Evaluar
+                                            <?php else: ?>
+                                                <span class="material-symbols-outlined text-[18px]">visibility</span> Ver
+                                            <?php endif; ?>
+                                        </a>
+                                        <a href="eliminar_proyecto.php?id=<?php echo $proj['id']; ?>" class="inline-flex items-center gap-1 bg-error/10 text-error px-2 py-1.5 rounded text-sm hover:bg-error/20 transition-all" onclick="return confirm('¿Estás seguro de que quieres eliminar este proyecto?');" title="Eliminar">
+                                            <span class="material-symbols-outlined text-[18px]">delete</span>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
