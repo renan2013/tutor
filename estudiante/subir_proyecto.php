@@ -34,8 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/\s]{11})%i', $youtube_url, $match);
     $youtube_id = isset($match[1]) ? $match[1] : null;
 
-    if (empty($titulo) || empty($descripcion_corta) || empty($youtube_id)) {
-        $error = 'Por favor, completa todos los campos y asegúrate de que la URL de YouTube sea válida.';
+    if (empty($titulo) || empty($descripcion_corta)) {
+        $error = 'Por favor, completa el título y la descripción.';
+    } elseif (!$youtube_id) {
+        $error = 'No pudimos reconocer el enlace de YouTube. Asegúrate de que sea un enlace válido (ej. https://www.youtube.com/watch?v=...). Enlace ingresado: ' . htmlspecialchars($youtube_url);
     } else {
         // Construir el HTML del iframe
         $contenido_html = '
