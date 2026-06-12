@@ -81,7 +81,7 @@ include '../includes/header.php';
     </div>
 </div>
 
-<div class="mt-8 text-center text-[10px] text-white opacity-50 pb-8">
+<div class="mt-8 text-center text-xs text-white opacity-60 pb-8 tracking-wide">
     Developed by renangalvan.net - San José, Costa Rica 2026 - +506 87777849
 </div>
 
