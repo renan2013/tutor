@@ -51,12 +51,18 @@ include '../includes/header.php';
 
     <!-- Sección de Proyectos Prácticos (Destacada) -->
     <section>
-        <div class="flex items-center gap-md mb-lg">
-            <span class="material-symbols-outlined text-primary text-3xl">lightbulb</span>
-            <div>
-                <h2 class="font-headline-xl text-headline-xl text-on-surface">Proyectos Prácticos</h2>
-                <p class="font-body-md text-on-surface-variant">Aplica lo aprendido creando proyectos reales paso a paso.</p>
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-md mb-lg">
+            <div class="flex items-center gap-md">
+                <span class="material-symbols-outlined text-primary text-3xl">lightbulb</span>
+                <div>
+                    <h2 class="font-headline-xl text-headline-xl text-on-surface">Proyectos Prácticos</h2>
+                    <p class="font-body-md text-on-surface-variant">Aplica lo aprendido creando proyectos reales paso a paso.</p>
+                </div>
             </div>
+            <a href="/tutor/estudiante/subir_proyecto.php" class="inline-flex items-center gap-2 bg-surface-container-high border border-primary text-primary font-label-md px-4 py-2 rounded-lg hover:bg-primary/10 transition-colors">
+                <span class="material-symbols-outlined text-lg">upload</span>
+                Sube tu Proyecto
+            </a>
         </div>
 
         <?php if (empty($proyectos)): ?>
