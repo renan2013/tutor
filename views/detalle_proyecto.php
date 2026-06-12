@@ -41,6 +41,37 @@ try {
     exit;
 }
 
+// Lógica para procesar un nuevo comentario
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comentario']) && isset($_SESSION['usuario_id'])) {
+    $nuevo_comentario = trim($_POST['comentario']);
+    if (!empty($nuevo_comentario)) {
+        try {
+            $stmt_com = $pdo->prepare("INSERT INTO proyecto_comentarios (proyecto_id, usuario_id, comentario) VALUES (?, ?, ?)");
+            $stmt_com->execute([$proyecto_id, $_SESSION['usuario_id'], $nuevo_comentario]);
+            // Redirigir para evitar reenvío del formulario
+            header("Location: detalle_proyecto.php?id=" . $proyecto_id);
+            exit;
+        } catch (Exception $e) {
+            $error_comentario = "No se pudo publicar el comentario.";
+        }
+    }
+}
+
+// Obtener los comentarios del proyecto
+try {
+    $stmt_comentarios = $pdo->prepare("
+        SELECT pc.*, u.nombre as autor_comentario 
+        FROM proyecto_comentarios pc
+        JOIN usuarios u ON pc.usuario_id = u.id
+        WHERE pc.proyecto_id = ?
+        ORDER BY pc.fecha_creacion DESC
+    ");
+    $stmt_comentarios->execute([$proyecto_id]);
+    $comentarios = $stmt_comentarios->fetchAll();
+} catch (Exception $e) {
+    $comentarios = [];
+}
+
 // Si no está publicado, solo el autor o un administrador pueden verlo
 $puede_ver = false;
 if (in_array($proyecto['estado'], ['publicado', 'revision'])) {
@@ -106,6 +137,59 @@ include '../includes/header.php';
                         }
                         echo $html_video; 
                     ?>
+                </div>
+            </div>
+
+            <!-- Sección de Comentarios -->
+            <div class="bg-surface-container rounded-xl p-lg border border-outline-variant shadow-lg mt-lg">
+                <h3 class="font-headline-md text-on-surface mb-md flex items-center gap-2 border-b border-outline-variant pb-2">
+                    <span class="material-symbols-outlined text-primary">forum</span> Feedback de Compañeros
+                </h3>
+
+                <?php if (isset($_SESSION['usuario_id'])): ?>
+                    <form method="POST" class="mb-lg">
+                        <div class="flex gap-md items-start">
+                            <div class="w-10 h-10 rounded-full bg-primary-container/20 flex-shrink-0 flex items-center justify-center border border-primary-container/30">
+                                <span class="material-symbols-outlined text-xl text-primary-container">person</span>
+                            </div>
+                            <div class="flex-grow">
+                                <textarea name="comentario" rows="2" required placeholder="Añade un comentario, observación o consejo constructivo..." class="w-full bg-surface-container-highest text-on-surface border border-outline-variant rounded-lg px-md py-3 focus:outline-none focus:border-primary-container transition-all text-sm mb-2"></textarea>
+                                <?php if(isset($error_comentario)): ?>
+                                    <p class="text-error text-xs mb-2"><?php echo $error_comentario; ?></p>
+                                <?php endif; ?>
+                                <div class="flex justify-end">
+                                    <button type="submit" class="bg-primary-container text-on-primary font-label-md px-4 py-2 rounded hover:brightness-110 active:scale-95 transition-all shadow-md">
+                                        Publicar Comentario
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                <?php else: ?>
+                    <div class="bg-surface-container-low border border-outline-variant p-md rounded-lg text-center mb-lg">
+                        <p class="text-on-surface-variant text-sm"><a href="/tutor/auth/login.php" class="text-primary hover:underline">Inicia sesión</a> para dejar un comentario.</p>
+                    </div>
+                <?php endif; ?>
+
+                <div class="space-y-md">
+                    <?php if(empty($comentarios)): ?>
+                        <p class="text-on-surface-variant text-sm italic text-center py-md">Aún no hay comentarios. ¡Sé el primero en dar tu opinión!</p>
+                    <?php else: ?>
+                        <?php foreach($comentarios as $com): ?>
+                            <div class="flex gap-md items-start bg-surface-container-low p-md rounded-lg border border-outline-variant">
+                                <div class="w-8 h-8 rounded-full bg-surface-container-highest flex-shrink-0 flex items-center justify-center border border-outline-variant">
+                                    <span class="material-symbols-outlined text-sm text-on-surface-variant">person</span>
+                                </div>
+                                <div>
+                                    <div class="flex items-baseline gap-2 mb-1">
+                                        <span class="font-label-md text-on-surface"><?php echo htmlspecialchars($com['autor_comentario']); ?></span>
+                                        <span class="text-[10px] text-on-surface-variant"><?php echo date('d M Y, H:i', strtotime($com['fecha_creacion'])); ?></span>
+                                    </div>
+                                    <p class="font-body-sm text-on-surface-variant leading-relaxed"><?php echo nl2br(htmlspecialchars($com['comentario'])); ?></p>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
