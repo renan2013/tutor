@@ -35,6 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (strpos($iframe_code, '<iframe') === false) {
         $error = 'El código proporcionado no parece ser un iframe válido. Asegúrate de copiar el código de inserción (embed) correctamente.';
     } else {
+        // Asegurar que el iframe permita pantalla completa
+        if (strpos($iframe_code, 'allowfullscreen') === false) {
+            $iframe_code = str_replace('<iframe ', '<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" ', $iframe_code);
+        }
+
         // Envolver el iframe en un contenedor responsivo
         $contenido_html = '
 <div class="aspect-video w-full rounded-xl overflow-hidden shadow-lg border border-outline-variant my-lg flex items-center justify-center bg-black">

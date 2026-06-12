@@ -99,7 +99,13 @@ include '../includes/header.php';
                 
                 <div class="mt-lg">
                     <!-- Aquí se renderiza el iframe -->
-                    <?php echo $proyecto['contenido_html']; ?>
+                    <?php 
+                        $html_video = $proyecto['contenido_html'];
+                        if (strpos($html_video, 'allowfullscreen') === false) {
+                            $html_video = str_replace('<iframe ', '<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" ', $html_video);
+                        }
+                        echo $html_video; 
+                    ?>
                 </div>
             </div>
         </div>
