@@ -2,6 +2,12 @@
 session_start();
 require_once 'config/database.php';
 
+// Verificar si el usuario ha iniciado sesión
+if (!isset($_SESSION['usuario_id'])) {
+    header('Location: /auth/login.php');
+    exit;
+}
+
 $page_title = "Inicio - Aprende Diseño";
 $header_title = "Creative Suite";
 
