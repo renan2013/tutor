@@ -133,6 +133,7 @@
     </style>
 </head>
 <body class="flex flex-col min-h-screen custom-scrollbar overflow-x-hidden">
+    <?php if(isset($_SESSION['usuario_id'])): ?>
     <!-- TopAppBar -->
     <header class="bg-surface-container-highest border-b border-outline-variant shadow-sm fixed top-0 w-full z-50 flex justify-between items-center px-gutter h-16">
         <div class="flex items-center gap-md">
@@ -144,21 +145,16 @@
             </a>
         </div>
         <div class="flex items-center gap-sm">
-            <?php if(isset($_SESSION['usuario_id'])): ?>
-                <?php if($_SESSION['usuario_rol'] === 'administrador'): ?>
-                    <a href="/tutor/admin/index.php" class="text-primary-container hover:bg-primary-container/10 p-2 rounded-full flex items-center justify-center" title="Administración">
-                        <span class="material-symbols-outlined">admin_panel_settings</span>
-                    </a>
-                <?php endif; ?>
-                <span class="text-on-surface-variant font-label-md mr-2 hidden md:block"><?php echo explode(' ', $_SESSION['usuario_nombre'])[0]; ?></span>
-                <a href="/tutor/auth/logout.php" class="text-on-surface-variant hover:bg-surface-variant p-2 rounded-full flex items-center justify-center" title="Cerrar Sesión">
-                    <span class="material-symbols-outlined">logout</span>
-                </a>
-            <?php else: ?>
-                <a href="/tutor/auth/login.php" class="text-on-surface-variant hover:bg-surface-variant p-2 rounded-full flex items-center justify-center" title="Iniciar Sesión">
-                    <span class="material-symbols-outlined">person</span>
+            <?php if($_SESSION['usuario_rol'] === 'administrador'): ?>
+                <a href="/tutor/admin/index.php" class="text-primary-container hover:bg-primary-container/10 p-2 rounded-full flex items-center justify-center" title="Administración">
+                    <span class="material-symbols-outlined">admin_panel_settings</span>
                 </a>
             <?php endif; ?>
+            <span class="text-on-surface-variant font-label-md mr-2 hidden md:block"><?php echo explode(' ', $_SESSION['usuario_nombre'])[0]; ?></span>
+            <a href="/tutor/auth/logout.php" class="text-on-surface-variant hover:bg-surface-variant p-2 rounded-full flex items-center justify-center" title="Cerrar Sesión">
+                <span class="material-symbols-outlined">logout</span>
+            </a>
         </div>
     </header>
-    <main class="mt-16 mb-20 flex-grow px-gutter py-lg max-w-4xl mx-auto w-full">
+    <?php endif; ?>
+    <main class="<?php echo isset($_SESSION['usuario_id']) ? 'mt-16' : 'mt-8'; ?> mb-20 flex-grow px-gutter py-lg max-w-4xl mx-auto w-full">
