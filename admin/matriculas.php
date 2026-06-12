@@ -34,6 +34,7 @@ include '../includes/header.php';
     <div class="flex border-b border-outline-variant mb-lg overflow-x-auto">
         <a href="index.php" class="px-lg py-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors whitespace-nowrap">Herramientas</a>
         <a href="proyectos.php" class="px-lg py-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors whitespace-nowrap">Entregas</a>
+        <a href="categorias.php" class="px-lg py-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors whitespace-nowrap">Categorías</a>
         <a href="matriculas.php" class="px-lg py-md border-b-2 border-primary text-primary font-label-lg text-label-lg transition-colors whitespace-nowrap">Matrículas</a>
     </div>
 
