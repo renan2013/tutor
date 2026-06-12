@@ -27,22 +27,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titulo = trim($_POST['titulo']);
     $descripcion_corta = trim($_POST['descripcion_corta']);
     $categoria_id = (int)$_POST['categoria_id'];
-    $youtube_url = trim($_POST['youtube_url']);
+    $iframe_code = trim($_POST['iframe_code']);
     $herramientas_seleccionadas = isset($_POST['herramientas']) ? $_POST['herramientas'] : [];
 
-    // Extraer ID de YouTube
-    preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/\s]{11})%i', $youtube_url, $match);
-    $youtube_id = isset($match[1]) ? $match[1] : null;
-
-    if (empty($titulo) || empty($descripcion_corta)) {
-        $error = 'Por favor, completa el título y la descripción.';
-    } elseif (!$youtube_id) {
-        $error = 'No pudimos reconocer el enlace de YouTube. Asegúrate de que sea un enlace válido (ej. https://www.youtube.com/watch?v=...). Enlace ingresado: ' . htmlspecialchars($youtube_url);
+    if (empty($titulo) || empty($descripcion_corta) || empty($iframe_code)) {
+        $error = 'Por favor, completa todos los campos obligatorios, incluyendo el código iframe de tu video.';
+    } elseif (strpos($iframe_code, '<iframe') === false) {
+        $error = 'El código proporcionado no parece ser un iframe válido. Asegúrate de copiar el código de inserción (embed) correctamente.';
     } else {
-        // Construir el HTML del iframe
+        // Envolver el iframe en un contenedor responsivo
         $contenido_html = '
-<div class="aspect-video w-full rounded-xl overflow-hidden shadow-lg border border-outline-variant my-lg">
-    <iframe class="w-full h-full" src="https://www.youtube.com/embed/'.$youtube_id.'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<div class="aspect-video w-full rounded-xl overflow-hidden shadow-lg border border-outline-variant my-lg flex items-center justify-center bg-black">
+    ' . $iframe_code . '
 </div>';
 
         try {
@@ -130,13 +126,10 @@ include '../includes/header.php';
             </div>
 
             <div>
-                <label for="youtube_url" class="block font-label-lg text-label-lg text-on-surface-variant mb-xs">Enlace de tu video en YouTube *</label>
-                <div class="flex items-center gap-sm bg-surface-container-highest border border-outline-variant rounded-lg px-md py-2 focus-within:border-primary-container transition-all">
-                    <span class="material-symbols-outlined text-error">smart_display</span>
-                    <input type="url" id="youtube_url" name="youtube_url" required placeholder="https://www.youtube.com/watch?v=..."
-                        class="w-full bg-transparent text-on-surface border-none focus:ring-0">
-                </div>
-                <p class="text-[11px] text-on-surface-variant mt-1">Asegúrate de que el video esté como Público o No Listado.</p>
+                <label for="iframe_code" class="block font-label-lg text-label-lg text-on-surface-variant mb-xs">Código Iframe del Video (Drive/YouTube) *</label>
+                <textarea id="iframe_code" name="iframe_code" rows="3" required placeholder='<iframe src="..." ...></iframe>'
+                    class="w-full bg-surface-container-highest text-on-surface border border-outline-variant rounded-lg px-md py-3 focus:outline-none focus:border-primary-container transition-all font-mono text-xs"></textarea>
+                <p class="text-[11px] text-on-surface-variant mt-1">Copia y pega el código HTML "embed" o "insertar" de tu video.</p>
             </div>
 
             <div>
