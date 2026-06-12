@@ -66,7 +66,33 @@ CREATE TABLE IF NOT EXISTS chats_ia (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 6. Insertar datos iniciales de prueba
+-- 6. Tabla de Proyectos Prácticos
+CREATE TABLE IF NOT EXISTS proyectos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    categoria_id INT NOT NULL,
+    titulo VARCHAR(255) NOT NULL,
+    descripcion_corta TEXT,
+    contenido_html LONGTEXT, -- Aquí puede ir el iframe de YouTube y el paso a paso
+    dificultad ENUM('principiante', 'intermedio', 'avanzado') DEFAULT 'principiante',
+    tiempo_estimado INT, -- En minutos
+    imagen_portada VARCHAR(255), -- URL o ruta de la imagen
+    autor_id INT NOT NULL,
+    estado ENUM('publicado', 'borrador') DEFAULT 'borrador',
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (categoria_id) REFERENCES categorias(id) ON DELETE CASCADE,
+    FOREIGN KEY (autor_id) REFERENCES usuarios(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 7. Tabla Intermedia: Herramientas utilizadas en un Proyecto
+CREATE TABLE IF NOT EXISTS proyecto_herramientas (
+    proyecto_id INT NOT NULL,
+    tutorial_id INT NOT NULL,
+    PRIMARY KEY (proyecto_id, tutorial_id),
+    FOREIGN KEY (proyecto_id) REFERENCES proyectos(id) ON DELETE CASCADE,
+    FOREIGN KEY (tutorial_id) REFERENCES tutoriales(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 8. Insertar datos iniciales de prueba
 INSERT INTO usuarios (nombre, email, password, rol) VALUES 
 ('Admin Tutor', 'admin@tutor.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'administrador');
 
