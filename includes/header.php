@@ -143,11 +143,12 @@
         </div>
         <div class="flex items-center gap-sm">
             <?php if(isset($_SESSION['usuario_id'])): ?>
-                <a href="/auth/logout.php" class="text-on-surface-variant hover:bg-surface-variant p-2 rounded-full">
+                <span class="text-on-surface-variant font-label-md mr-2 hidden md:block"><?php echo explode(' ', $_SESSION['usuario_nombre'])[0]; ?></span>
+                <a href="/auth/logout.php" class="text-on-surface-variant hover:bg-surface-variant p-2 rounded-full flex items-center justify-center" title="Cerrar Sesión">
                     <span class="material-symbols-outlined">logout</span>
                 </a>
             <?php else: ?>
-                <a href="/auth/login.php" class="text-on-surface-variant hover:bg-surface-variant p-2 rounded-full">
+                <a href="/auth/login.php" class="text-on-surface-variant hover:bg-surface-variant p-2 rounded-full flex items-center justify-center" title="Iniciar Sesión">
                     <span class="material-symbols-outlined">person</span>
                 </a>
             <?php endif; ?>
