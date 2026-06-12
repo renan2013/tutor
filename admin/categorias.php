@@ -42,6 +42,13 @@ include '../includes/header.php';
         </a>
     </div>
 
+    <?php if (isset($_GET['error']) && $_GET['error'] === 'en_uso'): ?>
+        <div class="bg-error-container text-on-error-container p-md rounded-lg mb-lg flex items-center gap-md border border-error">
+            <span class="material-symbols-outlined">error</span>
+            <p class="font-body-sm">No se puede eliminar esta categoría porque tiene tutoriales o proyectos asociados. Elimínalos o muévelos primero.</p>
+        </div>
+    <?php endif; ?>
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
         <?php if (empty($categorias)): ?>
             <div class="col-span-full bg-surface-container rounded-xl p-xl border border-outline-variant text-center border-dashed">
@@ -58,7 +65,7 @@ include '../includes/header.php';
                             <a href="editar_categoria.php?id=<?php echo $cat['id']; ?>" class="p-1.5 text-primary hover:bg-primary/10 rounded" title="Editar">
                                 <span class="material-symbols-outlined text-[18px]">edit</span>
                             </a>
-                            <a href="eliminar_categoria.php?id=<?php echo $cat['id']; ?>" class="p-1.5 text-error hover:bg-error/10 rounded" title="Eliminar" onclick="return confirm('ATENCIÓN: Eliminar una categoría borrará todos los tutoriales y proyectos asociados a ella. ¿Estás absolutamente seguro?');">
+                            <a href="eliminar_categoria.php?id=<?php echo $cat['id']; ?>" class="p-1.5 text-error hover:bg-error/10 rounded" title="Eliminar" onclick="return confirm('¿Estás seguro de que quieres eliminar este curso? Solo podrás hacerlo si está vacío.');">
                                 <span class="material-symbols-outlined text-[18px]">delete</span>
                             </a>
                         </div>
