@@ -5,7 +5,7 @@ require_once '../config/database.php';
 $tutorial_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
 if ($tutorial_id <= 0) {
-    header('Location: /index.php');
+    header('Location: /tutor/index.php');
     exit;
 }
 
@@ -21,12 +21,12 @@ try {
     $tutorial = $stmt->fetch();
 
     if (!$tutorial) {
-        header('Location: /index.php');
+        header('Location: /tutor/index.php');
         exit;
     }
 
 } catch (Exception $e) {
-    header('Location: /index.php');
+    header('Location: /tutor/index.php');
     exit;
 }
 
@@ -38,9 +38,9 @@ include '../includes/header.php';
 
 <div class="space-y-lg">
     <nav class="flex items-center gap-xs text-on-surface-variant font-label-md text-label-md mb-lg">
-        <a href="/index.php" class="hover:text-primary transition-colors">Inicio</a>
+        <a href="/tutor/index.php" class="hover:text-primary transition-colors">Inicio</a>
         <span class="material-symbols-outlined text-sm">chevron_right</span>
-        <a href="/views/lista_herramientas.php?id=<?php echo $tutorial['categoria_id']; ?>" class="hover:text-primary transition-colors"><?php echo $tutorial['categoria_nombre']; ?></a>
+        <a href="/tutor/views/lista_herramientas.php?id=<?php echo $tutorial['categoria_id']; ?>" class="hover:text-primary transition-colors"><?php echo $tutorial['categoria_nombre']; ?></a>
         <span class="material-symbols-outlined text-sm">chevron_right</span>
         <span class="text-on-surface"><?php echo $tutorial['titulo']; ?></span>
     </nav>

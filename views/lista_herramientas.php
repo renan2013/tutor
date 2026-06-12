@@ -5,7 +5,7 @@ require_once '../config/database.php';
 $categoria_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
 if ($categoria_id <= 0) {
-    header('Location: /index.php');
+    header('Location: /tutor/index.php');
     exit;
 }
 
@@ -16,7 +16,7 @@ try {
     $categoria = $stmt->fetch();
 
     if (!$categoria) {
-        header('Location: /index.php');
+        header('Location: /tutor/index.php');
         exit;
     }
 
@@ -38,7 +38,7 @@ include '../includes/header.php';
 
 <div class="space-y-lg">
     <nav class="flex items-center gap-xs text-on-surface-variant font-label-md text-label-md mb-lg">
-        <a href="/index.php" class="hover:text-primary transition-colors">Inicio</a>
+        <a href="/tutor/index.php" class="hover:text-primary transition-colors">Inicio</a>
         <span class="material-symbols-outlined text-sm">chevron_right</span>
         <span class="text-on-surface"><?php echo $categoria['nombre']; ?></span>
     </nav>
@@ -52,7 +52,7 @@ include '../includes/header.php';
         <div class="bg-surface-container rounded-xl p-xl border border-outline-variant text-center">
             <span class="material-symbols-outlined text-5xl text-on-surface-variant mb-md">construction</span>
             <p class="font-body-lg text-on-surface-variant">Aún no hay tutoriales disponibles para esta categoría.</p>
-            <a href="/index.php" class="inline-block mt-lg text-primary font-label-lg">Volver al inicio</a>
+            <a href="/tutor/index.php" class="inline-block mt-lg text-primary font-label-lg">Volver al inicio</a>
         </div>
     <?php else: ?>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
