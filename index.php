@@ -11,9 +11,19 @@ if (!isset($_SESSION['usuario_id'])) {
 $page_title = "Inicio - Aprende Diseño";
 $header_title = "Creative Suite";
 
-// Obtener categorías de la base de datos
+// Obtener categorías de la base de datos según el rol y la matrícula
 try {
-    $stmt = $pdo->query("SELECT * FROM categorias");
+    if ($_SESSION['usuario_rol'] === 'administrador') {
+        $stmt = $pdo->query("SELECT * FROM categorias");
+    } else {
+        $stmt = $pdo->prepare("
+            SELECT c.* 
+            FROM categorias c
+            JOIN matriculas m ON c.id = m.categoria_id
+            WHERE m.usuario_id = ?
+        ");
+        $stmt->execute([$_SESSION['usuario_id']]);
+    }
     $categorias = $stmt->fetchAll();
 } catch (Exception $e) {
     $categorias = [];

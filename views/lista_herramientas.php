@@ -2,11 +2,27 @@
 session_start();
 require_once '../config/database.php';
 
+// Verificar si el usuario ha iniciado sesión
+if (!isset($_SESSION['usuario_id'])) {
+    header('Location: /tutor/auth/login.php');
+    exit;
+}
+
 $categoria_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
 if ($categoria_id <= 0) {
     header('Location: /tutor/index.php');
     exit;
+}
+
+// Verificar matrícula si es estudiante
+if ($_SESSION['usuario_rol'] !== 'administrador') {
+    $stmt_check = $pdo->prepare("SELECT 1 FROM matriculas WHERE usuario_id = ? AND categoria_id = ?");
+    $stmt_check->execute([$_SESSION['usuario_id'], $categoria_id]);
+    if (!$stmt_check->fetch()) {
+        header('Location: /tutor/index.php');
+        exit;
+    }
 }
 
 // Obtener detalles de la categoría
