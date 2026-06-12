@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Drawing Tools - Learn Illustrator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#474747",
+                    "on-error": "#690005",
+                    "on-primary-fixed": "#2c1600",
+                    "tertiary-fixed": "#c0e8ff",
+                    "tertiary-container": "#00c0fa",
+                    "outline-variant": "#544434",
+                    "primary": "#ffc183",
+                    "surface-bright": "#393939",
+                    "secondary-fixed-dim": "#c8c6c6",
+                    "inverse-primary": "#8a5100",
+                    "on-primary-container": "#653a00",
+                    "on-background": "#e5e2e1",
+                    "outline": "#a28d7a",
+                    "on-secondary": "#303030",
+                    "primary-fixed": "#ffdcbd",
+                    "secondary-fixed": "#e4e2e1",
+                    "background": "#131313",
+                    "error-container": "#93000a",
+                    "surface-container-lowest": "#0e0e0e",
+                    "primary-container": "#ff9a00",
+                    "on-secondary-fixed": "#1b1c1c",
+                    "tertiary-fixed-dim": "#71d2ff",
+                    "on-surface": "#e5e2e1",
+                    "inverse-on-surface": "#313030",
+                    "surface-container": "#20201f",
+                    "surface-variant": "#353535",
+                    "on-tertiary-container": "#004a63",
+                    "surface": "#131313",
+                    "on-secondary-fixed-variant": "#474747",
+                    "error": "#ffb4ab",
+                    "surface-container-low": "#1c1b1b",
+                    "on-primary-fixed-variant": "#693c00",
+                    "on-tertiary-fixed-variant": "#004d66",
+                    "on-surface-variant": "#dac2ad",
+                    "tertiary": "#89d8ff",
+                    "surface-tint": "#ffb86d",
+                    "on-tertiary-fixed": "#001e2b",
+                    "surface-dim": "#131313",
+                    "on-secondary-container": "#b6b5b4",
+                    "on-primary": "#492900",
+                    "on-tertiary": "#003547",
+                    "secondary": "#c8c6c6",
+                    "surface-container-highest": "#353535",
+                    "surface-container-high": "#2a2a2a",
+                    "inverse-surface": "#e5e2e1",
+                    "on-error-container": "#ffdad6",
+                    "primary-fixed-dim": "#ffb86d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "sm": "12px",
+                    "lg": "24px",
+                    "gutter": "16px",
+                    "xl": "32px",
+                    "xs": "4px",
+                    "base": "8px",
+                    "container-margin": "20px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Hanken Grotesk"],
+                    "label-caps": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-xl": ["Hanken Grotesk"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "body-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500"}],
+                    "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #121212;
+            color: #e5e2e1;
+        }
+        .tool-card {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #2D2D2D;
+        }
+        .tool-card:active {
+            border-color: #ff9a00;
+            transform: scale(0.98);
+        }
+        .key-cap {
+            background: #2D2D2D;
+            border-bottom: 2px solid #1a1a1a;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #131313;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #353535;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-surface-container-highest border-b border-outline-variant fixed top-0 w-full z-50 shadow-sm flex justify-between items-center px-gutter h-16 w-full">
+<div class="flex items-center gap-4">
+<button class="transition-colors duration-200 active:scale-95 text-on-surface-variant hover:bg-surface-variant p-2 rounded-full">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary">Drawing Tools</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="transition-colors duration-200 active:scale-95 text-on-surface-variant hover:bg-surface-variant p-2 rounded-full">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="transition-colors duration-200 active:scale-95 text-on-surface-variant hover:bg-surface-variant p-2 rounded-full">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</header>
+<!-- Content Canvas -->
+<main class="flex-grow pt-20 pb-24 px-container-margin overflow-y-auto custom-scrollbar">
+<!-- Category Hero -->
+<div class="relative w-full h-48 rounded-xl overflow-hidden mb-lg shadow-xl">
+<img class="w-full h-full object-cover opacity-60" data-alt="A professional dark-themed digital art studio workspace featuring a high-end drawing tablet displaying intricate vector paths. The scene is illuminated by a warm ambient orange light reflecting off sleek dark surfaces. Minimalist corporate aesthetic with a focus on technical precision and professional creative tools, using deep blacks and vibrant orange accents for a high-fidelity learning environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAukS0vFaiisv1ClpL9EDhDP1D5OexTHGFWTpDyZAYxciwKTHheKWNDjZBxc_UTU82u_blqu_jvinzUV44OnpbxhOr91c1K0moqMFDZHM7g7wZCpTPDUz9MsbnOArIDqV91KUalGJqIs08lkG05PuKI1RcJVOmKfu21wKHd6UmFLiusMMtL4PkYQGG1L4ZsICZh0qO8u3-xCvJWnUUbbIdHuD_1PbuxbYP6-7S7wM4zbYnaz_6cCb-BiKjoDho147BlNhA5vXWmcqI"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent flex flex-col justify-end p-md">
+<span class="font-label-caps text-label-caps text-primary mb-xs tracking-widest uppercase">Mastery Path</span>
+<h2 class="font-headline-xl text-headline-xl text-on-background">Vector Precision</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xs">Master the core engine of Illustrator with these essential drawing tools.</p>
+</div>
+</div>
+<!-- Progress Indicator -->
+<div class="mb-xl bg-surface-container-low p-md rounded-lg border border-outline-variant">
+<div class="flex justify-between items-center mb-sm">
+<span class="font-label-md text-label-md text-on-surface">Category Progress</span>
+<span class="font-label-md text-label-md text-primary">45%</span>
+</div>
+<div class="h-1 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[45%] rounded-full"></div>
+</div>
+</div>
+<!-- Tool List -->
+<div class="space-y-md">
+<!-- Tool: Pen Tool -->
+<div class="tool-card bg-surface-container rounded-xl p-md flex items-center gap-md group cursor-pointer hover:bg-surface-container-high shadow-sm">
+<div class="w-12 h-12 bg-surface-variant rounded-lg flex items-center justify-center group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary-container" style="font-variation-settings: 'FILL' 1;">edit</span>
+</div>
+<div class="flex-grow">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-on-surface">Pen Tool</h3>
+<div class="key-cap px-2 py-0.5 rounded text-[10px] font-bold text-on-surface-variant uppercase">P</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Create precise paths with anchor points and handles.</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant">chevron_right</span>
+</div>
+<!-- Tool: Pencil Tool -->
+<div class="tool-card bg-surface-container rounded-xl p-md flex items-center gap-md group cursor-pointer hover:bg-surface-container-high shadow-sm">
+<div class="w-12 h-12 bg-surface-variant rounded-lg flex items-center justify-center group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary-container">edit_square</span>
+</div>
+<div class="flex-grow">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-on-surface">Pencil Tool</h3>
+<div class="key-cap px-2 py-0.5 rounded text-[10px] font-bold text-on-surface-variant uppercase">N</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Draw free-form paths with a natural, hand-drawn feel.</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant">chevron_right</span>
+</div>
+<!-- Tool: Curvature Tool -->
+<div class="tool-card bg-surface-container rounded-xl p-md flex items-center gap-md group cursor-pointer hover:bg-surface-container-high shadow-sm">
+<div class="w-12 h-12 bg-surface-variant rounded-lg flex items-center justify-center group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary-container">gesture</span>
+</div>
+<div class="flex-grow">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-on-surface">Curvature Tool</h3>
+<div class="key-cap px-2 py-0.5 rounded text-[10px] font-bold text-on-surface-variant uppercase">Shift + ~</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Intuitive path creation by clicking to define a curve.</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant">chevron_right</span>
+</div>
+<!-- Tool: Paintbrush Tool -->
+<div class="tool-card bg-surface-container rounded-xl p-md flex items-center gap-md group cursor-pointer hover:bg-surface-container-high shadow-sm">
+<div class="w-12 h-12 bg-surface-variant rounded-lg flex items-center justify-center group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary-container">brush</span>
+</div>
+<div class="flex-grow">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-on-surface">Brush Tool</h3>
+<div class="key-cap px-2 py-0.5 rounded text-[10px] font-bold text-on-surface-variant uppercase">B</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Apply artistic strokes and variable widths to paths.</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant">chevron_right</span>
+</div>
+</div>
+<!-- Featured Lesson Card -->
+<div class="mt-xl p-lg rounded-xl bg-gradient-to-br from-surface-container-high to-surface-container border border-primary/20 relative overflow-hidden">
+<div class="relative z-10">
+<h4 class="font-headline-md text-headline-md text-primary mb-xs">Advanced Bézier Mastery</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Interactive drills to master the Pen tool handles and complex curves.</p>
+<button class="bg-primary-container text-on-primary-container px-lg py-sm rounded-full font-label-lg text-label-lg active:scale-95 transition-transform">
+                    Start Practice Mode
+                </button>
+</div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[120px] opacity-10 text-primary pointer-events-none">auto_fix_high</span>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-surface-container-highest border-t border-outline-variant fixed bottom-0 w-full z-50 shadow-lg flex justify-around items-center h-20 pb-safe w-full px-2">
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-secondary-container transition-all cursor-pointer active:scale-90 duration-150">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-md text-label-md">Explore</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 transition-all duration-150 cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">architecture</span>
+<span class="font-label-md text-label-md">Tutorials</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-secondary-container transition-all cursor-pointer active:scale-90 duration-150">
+<span class="material-symbols-outlined">star</span>
+<span class="font-label-md text-label-md">Favorites</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-secondary-container transition-all cursor-pointer active:scale-90 duration-150">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</div>
+</nav>
+<script>
+        // Simple micro-interaction for tool cards
+        document.querySelectorAll('.tool-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // Potential for adding haptic-like visual feedback
+            });
+        });
+
+        // Handle navigation active states (Tutorials is active based on context)
+        // This is handled by the static classes but could be dynamic
+    </script>
+</body></html>
