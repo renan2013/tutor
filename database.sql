@@ -75,9 +75,11 @@ CREATE TABLE IF NOT EXISTS proyectos (
     contenido_html LONGTEXT, -- Aquí puede ir el iframe de YouTube y el paso a paso
     dificultad ENUM('principiante', 'intermedio', 'avanzado') DEFAULT 'principiante',
     tiempo_estimado INT, -- En minutos
+    calificacion INT NULL, -- Puntuación otorgada por el tutor (0-100)
+    feedback_tutor TEXT NULL, -- Comentarios del tutor
     imagen_portada VARCHAR(255), -- URL o ruta de la imagen
     autor_id INT NOT NULL,
-    estado ENUM('publicado', 'borrador') DEFAULT 'borrador',
+    estado ENUM('revision', 'publicado', 'rechazado', 'borrador') DEFAULT 'revision',
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (categoria_id) REFERENCES categorias(id) ON DELETE CASCADE,
     FOREIGN KEY (autor_id) REFERENCES usuarios(id) ON DELETE CASCADE
