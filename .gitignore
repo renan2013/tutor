@@ -2,10 +2,6 @@
 composer.lock
 vendor/
 
-# Configuración sensible (¡No subir a Git!)
-config/database.php
-config/api_keys.php
-
 # SO
 .DS_Store
 Thumbs.db
