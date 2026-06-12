@@ -52,8 +52,8 @@ include '../includes/header.php';
 
 <div class="max-w-md mx-auto bg-surface-container rounded-xl p-xl border border-outline-variant shadow-lg">
     <div class="text-center mb-xl">
-        <div class="w-16 h-16 bg-primary-container/20 rounded-full flex items-center justify-center mx-auto mb-md">
-            <span class="material-symbols-outlined text-4xl text-primary-container">person_add</span>
+        <div class="flex items-center justify-center mx-auto mb-md">
+            <img src="/tutor/assets/imgs/logo_learning.png" alt="Learn Design Logo" class="h-20 object-contain drop-shadow-md">
         </div>
         <h2 class="font-headline-lg text-headline-lg text-on-surface">Únete a la Academia</h2>
         <p class="font-body-sm text-on-surface-variant">Comienza tu camino creativo hoy mismo.</p>

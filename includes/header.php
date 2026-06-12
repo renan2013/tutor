@@ -139,7 +139,10 @@
             <button class="text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 active:scale-95 p-2 rounded-full">
                 <span class="material-symbols-outlined">menu</span>
             </button>
-            <h1 class="font-headline-lg text-headline-lg font-bold text-primary"><?php echo isset($header_title) ? $header_title : "Creative Suite"; ?></h1>
+            <a href="/tutor/index.php" class="flex items-center gap-2">
+                <img src="/tutor/assets/imgs/logo_learning.png" alt="Learn Design Logo" class="h-8 md:h-10 object-contain">
+                <h1 class="font-headline-lg text-headline-lg font-bold text-primary hidden sm:block"><?php echo isset($header_title) ? $header_title : "Creative Suite"; ?></h1>
+            </a>
         </div>
         <div class="flex items-center gap-sm">
             <?php if(isset($_SESSION['usuario_id'])): ?>
