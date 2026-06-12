@@ -143,6 +143,11 @@
         </div>
         <div class="flex items-center gap-sm">
             <?php if(isset($_SESSION['usuario_id'])): ?>
+                <?php if($_SESSION['usuario_rol'] === 'administrador'): ?>
+                    <a href="/tutor/admin/index.php" class="text-primary-container hover:bg-primary-container/10 p-2 rounded-full flex items-center justify-center" title="Administración">
+                        <span class="material-symbols-outlined">admin_panel_settings</span>
+                    </a>
+                <?php endif; ?>
                 <span class="text-on-surface-variant font-label-md mr-2 hidden md:block"><?php echo explode(' ', $_SESSION['usuario_nombre'])[0]; ?></span>
                 <a href="/tutor/auth/logout.php" class="text-on-surface-variant hover:bg-surface-variant p-2 rounded-full flex items-center justify-center" title="Cerrar Sesión">
                     <span class="material-symbols-outlined">logout</span>
