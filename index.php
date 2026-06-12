@@ -4,7 +4,7 @@ require_once 'config/database.php';
 
 // Verificar si el usuario ha iniciado sesión
 if (!isset($_SESSION['usuario_id'])) {
-    header('Location: /auth/login.php');
+    header('Location: auth/login.php');
     exit;
 }
 
@@ -30,7 +30,7 @@ include 'includes/header.php';
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
         <?php foreach ($categorias as $cat): ?>
-            <a href="/views/lista_herramientas.php?id=<?php echo $cat['id']; ?>" class="group">
+            <a href="views/lista_herramientas.php?id=<?php echo $cat['id']; ?>" class="group">
                 <div class="bg-surface-container rounded-xl p-lg border border-outline-variant hover:border-primary-container transition-all duration-300 transform group-hover:-translate-y-1 shadow-lg">
                     <div class="w-16 h-16 rounded-xl mb-md flex items-center justify-center" style="background-color: <?php echo $cat['color_hex']; ?>20; border: 1px solid <?php echo $cat['color_hex']; ?>40;">
                         <span class="material-symbols-outlined text-4xl" style="color: <?php echo $cat['color_hex']; ?>; font-variation-settings: 'FILL' 1;"><?php echo $cat['icono']; ?></span>
@@ -53,7 +53,7 @@ include 'includes/header.php';
         <div class="flex-grow text-center md:text-left">
             <h3 class="font-headline-lg text-headline-lg text-primary mb-xs">¿Tienes dudas técnicas?</h3>
             <p class="font-body-md text-body-md text-on-surface-variant mb-md">Nuestro asistente IA está entrenado en Adobe Creative Suite para ayudarte en tiempo real.</p>
-            <a href="/views/asistente_ia.php" class="inline-block bg-primary-container text-on-primary font-label-lg text-label-lg px-xl py-3 rounded-lg hover:brightness-110 active:scale-95 transition-all shadow-md">
+            <a href="views/asistente_ia.php" class="inline-block bg-primary-container text-on-primary font-label-lg text-label-lg px-xl py-3 rounded-lg hover:brightness-110 active:scale-95 transition-all shadow-md">
                 Consultar Asistente
             </a>
         </div>
