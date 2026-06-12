@@ -3,7 +3,7 @@ session_start();
 require_once '../config/database.php';
 
 if (isset($_SESSION['usuario_id'])) {
-    header('Location: /index.php');
+    header('Location: ../index.php');
     exit;
 }
 
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['usuario_nombre'] = $usuario['nombre'];
                 $_SESSION['usuario_rol'] = $usuario['rol'];
 
-                header('Location: /index.php');
+                header('Location: ../index.php');
                 exit;
             } else {
                 $error = 'Correo electrónico o contraseña incorrectos.';

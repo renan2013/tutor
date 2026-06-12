@@ -3,7 +3,7 @@ session_start();
 require_once '../config/database.php';
 
 if (isset($_SESSION['usuario_id'])) {
-    header('Location: /index.php');
+    header('Location: ../index.php');
     exit;
 }
 
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['usuario_nombre'] = $nombre;
                 $_SESSION['usuario_rol'] = 'estudiante';
 
-                header('Location: /index.php');
+                header('Location: ../index.php');
                 exit;
             }
         } catch (Exception $e) {
