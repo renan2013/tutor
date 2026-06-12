@@ -92,6 +92,11 @@ include '../includes/header.php';
                                         <span class="material-symbols-outlined text-[14px]">schedule</span> <?php echo $proj['tiempo_estimado']; ?>m
                                     </span>
                                 </div>
+                                <?php if ($proj['estado'] === 'revision'): ?>
+                                    <div class="mb-sm flex items-center gap-1 text-orange-400 text-[11px] font-bold uppercase tracking-wider">
+                                        <span class="material-symbols-outlined text-[14px]">pending_actions</span> Pendiente de Calificación
+                                    </div>
+                                <?php endif; ?>
                                 <h3 class="font-headline-md text-headline-md text-on-surface mb-xs group-hover:text-primary transition-colors"><?php echo $proj['titulo']; ?></h3>
                                 <p class="font-body-sm text-body-sm text-on-surface-variant mb-lg flex-grow"><?php echo $proj['descripcion_corta']; ?></p>
                                 <div class="flex items-center text-primary font-label-md text-label-md mt-auto">

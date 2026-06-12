@@ -43,7 +43,7 @@ try {
 
 // Si no está publicado, solo el autor o un administrador pueden verlo
 $puede_ver = false;
-if ($proyecto['estado'] === 'publicado') {
+if (in_array($proyecto['estado'], ['publicado', 'revision'])) {
     $puede_ver = true;
 } elseif (isset($_SESSION['usuario_id'])) {
     if ($_SESSION['usuario_rol'] === 'administrador' || $_SESSION['usuario_id'] == $proyecto['autor_id']) {
@@ -72,11 +72,11 @@ include '../includes/header.php';
         <span class="text-on-surface">Proyecto</span>
     </nav>
 
-    <!-- Alerta si no está publicado (vista de previsualización para autor/admin) -->
-    <?php if ($proyecto['estado'] !== 'publicado'): ?>
+    <!-- Alerta si está en revisión -->
+    <?php if ($proyecto['estado'] === 'revision'): ?>
         <div class="bg-surface-container-low border border-orange-500/50 p-md rounded-lg flex items-center gap-md">
-            <span class="material-symbols-outlined text-orange-400">info</span>
-            <p class="font-body-sm text-on-surface-variant">Estás viendo una vista previa. Este proyecto está en estado <strong class="text-on-surface uppercase"><?php echo $proyecto['estado']; ?></strong> y aún no es público para los demás estudiantes.</p>
+            <span class="material-symbols-outlined text-orange-400">pending_actions</span>
+            <p class="font-body-sm text-on-surface-variant">Este proyecto es reciente y actualmente se encuentra <strong class="text-orange-400 uppercase">Pendiente de Calificación</strong> por parte del tutor.</p>
         </div>
     <?php endif; ?>
 
