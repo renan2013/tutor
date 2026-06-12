@@ -57,7 +57,7 @@ include '../includes/header.php';
     <?php else: ?>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
             <?php foreach ($tutoriales as $tut): ?>
-                <a href="/views/detalle_herramienta.php?id=<?php echo $tut['id']; ?>" class="group">
+                <a href="detalle_herramienta.php?id=<?php echo $tut['id']; ?>" class="group">
                     <div class="bg-surface-container rounded-xl p-lg border border-outline-variant hover:border-primary-container transition-all duration-300 transform group-hover:-translate-y-1 shadow-lg flex flex-col h-full">
                         <div class="flex items-start justify-between mb-md">
                             <div class="w-12 h-12 rounded-lg flex items-center justify-center bg-primary-container/10 border border-primary-container/20">
