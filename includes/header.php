@@ -141,7 +141,6 @@
             </button>
             <a href="/tutor/index.php" class="flex items-center gap-2">
                 <img src="/tutor/assets/imgs/logo_learning.png" alt="Learn Design Logo" class="h-8 md:h-10 object-contain">
-                <h1 class="font-headline-lg text-headline-lg font-bold text-primary hidden sm:block"><?php echo isset($header_title) ? $header_title : "Creative Suite"; ?></h1>
             </a>
         </div>
         <div class="flex items-center gap-sm">
