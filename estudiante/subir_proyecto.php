@@ -13,11 +13,32 @@ $success = '';
 
 // Obtener categorías y tutoriales para el select
 try {
-    $stmt = $pdo->query("SELECT * FROM categorias");
+    // Solo categorías donde el estudiante está matriculado
+    $stmt = $pdo->prepare("
+        SELECT c.* 
+        FROM categorias c
+        JOIN matriculas m ON c.id = m.categoria_id
+        WHERE m.usuario_id = ?
+    ");
+    $stmt->execute([$_SESSION['usuario_id']]);
     $categorias = $stmt->fetchAll();
     
-    $stmt = $pdo->query("SELECT id, titulo, categoria_id FROM tutoriales WHERE estado = 'publicado' ORDER BY titulo");
-    $tutoriales_disponibles = $stmt->fetchAll();
+    // Solo tutoriales de las categorías matriculadas
+    if (!empty($categorias)) {
+        $category_ids = array_column($categorias, 'id');
+        $placeholders = str_repeat('?,', count($category_ids) - 1) . '?';
+        $stmt = $pdo->prepare("
+            SELECT id, titulo, categoria_id 
+            FROM tutoriales 
+            WHERE estado = 'publicado' 
+            AND categoria_id IN ($placeholders)
+            ORDER BY titulo
+        ");
+        $stmt->execute($category_ids);
+        $tutoriales_disponibles = $stmt->fetchAll();
+    } else {
+        $tutoriales_disponibles = [];
+    }
 } catch (Exception $e) {
     $categorias = [];
     $tutoriales_disponibles = [];
