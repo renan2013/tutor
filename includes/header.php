@@ -134,10 +134,75 @@
 </head>
 <body class="flex flex-col min-h-screen custom-scrollbar overflow-x-hidden">
     <?php if(isset($_SESSION['usuario_id'])): ?>
+    <!-- Sidebar Overlay -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black/60 z-[60] hidden backdrop-blur-sm transition-opacity duration-300"></div>
+
+    <!-- Sidebar Drawer -->
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-72 bg-surface-container-highest border-r border-outline-variant z-[70] transform -translate-x-full transition-transform duration-300 ease-in-out shadow-2xl flex flex-col">
+        <div class="p-gutter border-b border-outline-variant flex items-center justify-between h-16">
+            <div class="flex items-center gap-2">
+                <img src="/tutor/assets/imgs/logo_learning.png" alt="Logo" class="h-8 object-contain">
+            </div>
+            <button id="close-sidebar" class="text-on-surface-variant hover:bg-surface-variant p-2 rounded-full transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <nav class="flex flex-col p-4 gap-2 overflow-y-auto custom-scrollbar flex-grow">
+            <a href="/tutor/index.php" class="flex items-center gap-md p-4 rounded-xl text-on-surface hover:bg-surface-variant transition-all group">
+                <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">home</span>
+                <span class="font-label-lg">Learning</span>
+            </a>
+            <a href="/tutor/views/lista_herramientas.php" class="flex items-center gap-md p-4 rounded-xl text-on-surface hover:bg-surface-variant transition-all group">
+                <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">architecture</span>
+                <span class="font-label-lg">Tutoriales</span>
+            </a>
+            <a href="/tutor/views/asistente_ia.php" class="flex items-center gap-md p-4 rounded-xl text-on-surface hover:bg-surface-variant transition-all group">
+                <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">psychology</span>
+                <span class="font-label-lg">IA Assistant</span>
+            </a>
+            <a href="/tutor/estudiante/dashboard.php" class="flex items-center gap-md p-4 rounded-xl text-on-surface hover:bg-surface-variant transition-all group">
+                <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">star</span>
+                <span class="font-label-lg">Mi Progreso</span>
+            </a>
+            
+            <div class="mt-auto pt-4 border-t border-outline-variant">
+                <?php if($_SESSION['usuario_rol'] === 'administrador'): ?>
+                    <a href="/tutor/admin/index.php" class="flex items-center gap-md p-4 rounded-xl text-primary-container hover:bg-primary-container/10 transition-all">
+                        <span class="material-symbols-outlined">admin_panel_settings</span>
+                        <span class="font-label-lg">Panel Admin</span>
+                    </a>
+                <?php endif; ?>
+                <a href="/tutor/auth/logout.php" class="flex items-center gap-md p-4 rounded-xl text-error hover:bg-error/10 transition-all">
+                    <span class="material-symbols-outlined">logout</span>
+                    <span class="font-label-lg">Cerrar Sesión</span>
+                </a>
+            </div>
+        </nav>
+    </aside>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.getElementById('menu-btn');
+            const closeBtn = document.getElementById('close-sidebar');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+
+            function toggleSidebar() {
+                sidebar.classList.toggle('-translate-x-full');
+                overlay.classList.toggle('hidden');
+                document.body.classList.toggle('overflow-hidden');
+            }
+
+            if (menuBtn) menuBtn.addEventListener('click', toggleSidebar);
+            if (closeBtn) closeBtn.addEventListener('click', toggleSidebar);
+            if (overlay) overlay.addEventListener('click', toggleSidebar);
+        });
+    </script>
+
     <!-- TopAppBar -->
     <header class="bg-surface-container-highest border-b border-outline-variant shadow-sm fixed top-0 w-full z-50 flex justify-between items-center px-gutter h-16">
         <div class="flex items-center gap-md">
-            <button class="text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 active:scale-95 p-2 rounded-full">
+            <button id="menu-btn" class="text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 active:scale-95 p-2 rounded-full">
                 <span class="material-symbols-outlined">menu</span>
             </button>
             <a href="/tutor/index.php" class="flex items-center gap-2">
@@ -145,16 +210,11 @@
             </a>
         </div>
         <div class="flex items-center gap-sm">
-            <?php if($_SESSION['usuario_rol'] === 'administrador'): ?>
-                <a href="/tutor/admin/index.php" class="text-primary-container hover:bg-primary-container/10 p-2 rounded-full flex items-center justify-center" title="Administración">
-                    <span class="material-symbols-outlined">admin_panel_settings</span>
-                </a>
-            <?php endif; ?>
             <span class="text-on-surface-variant font-label-md mr-2 hidden md:block"><?php echo explode(' ', $_SESSION['usuario_nombre'])[0]; ?></span>
-            <a href="/tutor/auth/logout.php" class="text-on-surface-variant hover:bg-surface-variant p-2 rounded-full flex items-center justify-center" title="Cerrar Sesión">
-                <span class="material-symbols-outlined">logout</span>
-            </a>
+            <div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary font-bold text-sm">
+                <?php echo substr($_SESSION['usuario_nombre'], 0, 1); ?>
+            </div>
         </div>
     </header>
     <?php endif; ?>
-    <main class="<?php echo isset($_SESSION['usuario_id']) ? 'mt-16' : 'mt-8'; ?> mb-20 flex-grow px-gutter py-lg max-w-4xl mx-auto w-full">
+    <main class="<?php echo isset($_SESSION['usuario_id']) ? 'mt-16' : 'mt-8'; ?> mb-8 flex-grow px-gutter py-lg max-w-4xl mx-auto w-full">
